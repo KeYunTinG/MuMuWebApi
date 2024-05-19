@@ -39,5 +39,5 @@ public partial class Project
 
     public virtual ICollection<ProjectIdtype> ProjectIdtypes { get; set; } = new List<ProjectIdtype>();
 
-   // public virtual Role Role { get; set; } = null!;
+    // public virtual Role Role { get; set; } = null!;
 }

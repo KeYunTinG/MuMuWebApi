@@ -66,12 +66,25 @@ namespace WebApiV2.Controllers
 
         // POST api/<ProjectController>
         [HttpPost]
+        //public async Task<IActionResult> Post([FromBody] Project value ,[FromForm] IFormFile img)
         public IActionResult Post([FromBody] Project value)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid project data.");
             }
+            //if (img != null)
+            //{
+            //    var filePath = Path.Combine("path/to/save", img.FileName);
+
+            //    using (var stream = new FileStream(filePath, FileMode.Create))
+            //    {
+            //        await img.CopyToAsync(stream);
+            //    }
+            //    value.Thumbnail = filePath;
+            //    // 設置文件路徑或其他需要的屬性
+            //    // productCreateDto.ThumbnailPath = filePath;
+            //}
             db.Add(value);
             db.SaveChanges();
             return Ok(value);
@@ -79,19 +92,21 @@ namespace WebApiV2.Controllers
 
         // PUT api/<ProjectController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Project value)
         {
-            //Project? p = db.Projects.FirstOrDefault(x => x.ProjectId == id);
-            //if (p == null)
-            //    return;
-            //project.ProjectName = p.ProjectName;
-            //project.Description = p.Description;
-            ////status;
-            //project.Goal = p.Goal;
-            //project.Date = p.Date;
-            //project.ExpireDate = p.ExpireDate;
-            //db.SaveChanges();
-            //return;
+            Project? p = db.Projects.FirstOrDefault(x => x.ProjectId == id);
+            if (p == null)
+            {
+                return NotFound("Project not found.");
+            }
+                p.ProjectName = value.ProjectName;
+                p.Description = value.Description;
+                //status;
+                p.Goal = value.Goal;
+                p.Date = value.Date;
+                p.ExpireDate = value.ExpireDate;
+                db.SaveChanges();
+                return Ok(value);
         }
 
         // DELETE api/<ProjectController>/5

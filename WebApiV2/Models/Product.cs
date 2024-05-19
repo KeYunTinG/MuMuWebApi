@@ -29,5 +29,6 @@ public partial class Product
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
-    public virtual Project Project { get; set; } = null!;
+    //public virtual Project Project { get; set; } = null!;
+
 }

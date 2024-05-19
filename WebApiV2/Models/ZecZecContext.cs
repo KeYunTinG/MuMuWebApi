@@ -263,10 +263,10 @@ public partial class ZecZecContext : DbContext
             entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
             entity.Property(e => e.Thumbnail).HasMaxLength(50);
 
-            entity.HasOne(d => d.Project).WithMany(p => p.Products)
-                .HasForeignKey(d => d.ProjectId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Products_Projects");
+            //entity.HasOne(d => d.Project).WithMany(p => p.Products)
+            //    .HasForeignKey(d => d.ProjectId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Products_Projects");
         });
 
         modelBuilder.Entity<Project>(entity =>
